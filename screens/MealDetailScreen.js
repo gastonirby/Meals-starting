@@ -6,7 +6,7 @@ import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/data";
-import IconButton from '../components/IconButton';
+import IconButton from "../components/IconButton";
 
 function MealDetailScreen({ route, navigation }) {
   const mealId = route.params.mealId;
@@ -14,14 +14,20 @@ function MealDetailScreen({ route, navigation }) {
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
   function headerButtonPressHandler() {
-    console.log('pressed');
+    console.log("pressed");
   }
 
   useLayoutEffect(() => {
     navigation.setOptions({
-        headerRight: () => {
-            return <IconButton onPress={headerButtonPressHandler} />
-        }
+      headerRight: () => {
+        return (
+          <IconButton
+            icon="star"
+            color="white"
+            onPress={headerButtonPressHandler}
+          />
+        );
+      },
     });
   }, [navigation, headerButtonPressHandler]);
 
@@ -50,9 +56,9 @@ function MealDetailScreen({ route, navigation }) {
 export default MealDetailScreen;
 
 const styles = StyleSheet.create({
-    rootContainer: {
-        marginBottom: 32
-    },
+  rootContainer: {
+    marginBottom: 32,
+  },
   image: {
     width: "100%",
     height: 350,
@@ -68,7 +74,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   listOutterContainer: {
-    alignItems: 'center'
+    alignItems: "center",
   },
   listContainer: {
     width: "80%",
