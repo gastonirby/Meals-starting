@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import MealDetails from "../components/MealDetails";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import List from "../components/MealDetail/List";
 
+import Subtitle from "../components/MealDetail/Subtitle";
+import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/data";
 
 function MealDetailScreen({ route }) {
@@ -9,26 +11,51 @@ function MealDetailScreen({ route }) {
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
   return (
-    <View>
-      <Image source={{ uri: selectedMeal.ImageUrl }} />
-      <Text>{selectedMeal.title}</Text>
+    <ScrollView style={styles.rootContainer}>
+      <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
+      <Text style={styles.title}>{selectedMeal.title}</Text>
       <MealDetails
         duration={selectedMeal.duration}
         complexity={selectedMeal.complexity}
         affordability={selectedMeal.affordability}
+        textStyle={styles.detailText}
       />
-      <Text>Ingredients</Text>
-      {selectedMeal.ingredients.map((ingredient) => (
-        <Text key={ingredient}>{ingredient}</Text>
-      ))}
-      <Text>Steps</Text>
-      {selectedMeal.steps.map((step) => (
-        <Text key={step}>{step}</Text>
-      ))}
-    </View>
+      <View style={styles.listOutterContainer}>
+        <View style={styles.listContainer}>
+          <Subtitle>Ingredients</Subtitle>
+          <List data={selectedMeal.ingredients} />
+          <Subtitle>Steps</Subtitle>
+          <List data={selectedMeal.steps} />
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 export default MealDetailScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    rootContainer: {
+        marginBottom: 32
+    },
+  image: {
+    width: "100%",
+    height: 350,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 24,
+    margin: 8,
+    textAlign: "center",
+    color: "white",
+  },
+  detailText: {
+    color: "white",
+  },
+  listOutterContainer: {
+    alignItems: 'center'
+  },
+  listContainer: {
+    width: "80%",
+  },
+});
