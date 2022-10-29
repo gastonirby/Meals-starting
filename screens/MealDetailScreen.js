@@ -1,10 +1,12 @@
 import { useLayoutEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView, Button } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+
 import List from "../components/MealDetail/List";
 
 import Subtitle from "../components/MealDetail/Subtitle";
 import MealDetails from "../components/MealDetails";
 import { MEALS } from "../data/data";
+import IconButton from '../components/IconButton';
 
 function MealDetailScreen({ route, navigation }) {
   const mealId = route.params.mealId;
@@ -18,7 +20,7 @@ function MealDetailScreen({ route, navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({
         headerRight: () => {
-            return <Button title='tap' onPress={headerButtonPressHandler} />
+            return <IconButton onPress={headerButtonPressHandler} />
         }
     });
   }, [navigation, headerButtonPressHandler]);
